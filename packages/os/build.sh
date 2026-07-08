@@ -8,7 +8,8 @@ export RUGIX_BAKERY_IMAGE="ghcr.io/rugix/rugix-bakery@sha256:8562abd2577695bd5f3
 # export RUGIX_DEV=true
 
 # Allow running from anywhere
-cd "$(dirname $(readlink -f "${BASH_SOURCE[0]}"))"
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd -P)"
+cd "$script_dir"
 
 docker_buildx() {
     docker buildx build --load $@

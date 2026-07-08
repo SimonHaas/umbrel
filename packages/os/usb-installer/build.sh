@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+arch="${ARCH:-amd64}"
 rootfs_dir="/tmp/rootfs"
-iso_image="/tmp/umbrelos-amd64-usb-installer.iso"
+iso_image="/tmp/umbrelos-${arch}-usb-installer.iso"
 
 echo "Creating directories for ISO image..."
 mkdir -p "${rootfs_dir}/boot/grub"
 
 echo "Extracting rootfs..."
-tar -xf /data/build/rootfs.tar --directory "${rootfs_dir}"
+tar -xf /data/build/rootfs-${arch}.tar --directory "${rootfs_dir}"
 
 echo "Creating grub.cfg..."
 cat > "${rootfs_dir}/boot/grub/grub.cfg" <<EOF

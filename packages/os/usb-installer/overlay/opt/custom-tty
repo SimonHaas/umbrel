@@ -24,7 +24,7 @@ if dmidecode -t system | grep --silent 'Umbrel Home'
 then
     echo "Umbrel Home detected."
     echo "Automatically flashing internal storage..."
-    xz --decompress --stdout /umbrelos-amd64.img.xz | dd of=/dev/nvme0n1 bs=4M status=progress
+    xz --decompress --stdout /umbrelos.img.xz | dd of=/dev/nvme0n1 bs=4M status=progress
     echo "umbrelOS has been installed, shutting down."
     poweroff
     exit 1
@@ -35,7 +35,7 @@ if dmidecode -t system | grep --silent 'Umbrel Pro'
 then
     echo "Umbrel Pro detected."
     echo "Automatically flashing internal storage..."
-    xz --decompress --stdout /umbrelos-amd64.img.xz | dd of=/dev/mmcblk0 bs=4M status=progress
+    xz --decompress --stdout /umbrelos.img.xz | dd of=/dev/mmcblk0 bs=4M status=progress
     echo "umbrelOS has been installed, shutting down."
     poweroff
     exit 1
@@ -52,7 +52,7 @@ do
     then
         echo "installing umbrelOS on: $device"
         device_path="/dev/$(echo $device | awk '{print $1}')"
-        xz --decompress --stdout /umbrelos-amd64.img.xz | dd of=$device_path bs=4M status=progress
+        xz --decompress --stdout /umbrelos.img.xz | dd of=$device_path bs=4M status=progress
         sync
         echo
         echo "umbrelOS has been installed!"
