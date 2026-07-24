@@ -1,8 +1,8 @@
 # Based on https://github.com/lncm/docker-tor/tree/927ebac9fb43ba4d09249ee27688a4612b7a1707
 
-FROM debian:11-slim AS build
+FROM debian:trixie-slim AS build
 
-ARG VERSION=0.4.7.8
+ARG VERSION=0.4.9.11
 
 # Add Tor keys
 ENV KEYS 514102454D0A87DB0767A1EBBE6A0531C18A9179 B74417EDDF22AC9F9E90F49142E86A2A11F48D36 7A02B3521DC75C542BA015456AFEE6D49E92B601
@@ -35,7 +35,7 @@ RUN ./configure --sysconfdir=/etc --datadir=/var/lib && \
     make -j$(nproc) && \
     make install
 
-FROM debian:11-slim
+FROM debian:trixie-slim
 
 # Copy linked libraries
 COPY  --from=build /usr/lib /usr/lib
